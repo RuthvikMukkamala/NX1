@@ -16,7 +16,33 @@ The architecture integrates **Comet (Opik)** for real-time model evaluation and 
 - Uses FinnHub for 8-K link retrival.
 - Initially, filings are stored **locally for development**, with a future building block to **AWS S3 for scalable access**.
 
-### **2️⃣ Event Classification Models**
+### **My Intention**
+
+I hoped to allow the user to test out a variety of prompting techniques and clearly understand what
+technique proved to be the most accurate within our LLM observations. I generated a dataset of 66 LLM calls
+as a source of truth to refer to.
+
+Here are other methods you can use within your CLI:
+
+
+```sh
+--method cot            # Chain-of-Thought
+--method guided         # Guided Chain-of-Thought
+--method zero_shot      # Zero-Shot Classification
+--method few_shot       # Few-Shot Classification
+--method self_consistency # Self-Consistency Majority Voting
+--method tree_of_thought # Tree-of-Thought Classification
+--method self_refinement # Iterative Self-Refinement
+--method decomposition  # Decomposition-Based Event Analysis
+```
+
+Of-course some methods work better than others - LLM observations and evaluations are critical in helping us 
+achieve a better understanding of the prompting techniques we hope to implement. Opik's system allows me 
+a great interface to interpret my results
+
+
+
+### **Event Classification Models**
 I implement a range of **LLM-powered classification models**, each optimized for different reasoning approaches:
 
 | **Methodology**      | **Purpose**                                                                                      |
@@ -32,7 +58,7 @@ I implement a range of **LLM-powered classification models**, each optimized for
 
 ---
 
-### **3️⃣ Model Evaluation and Performance Tracking**
+### **Model Evaluation and Performance Tracking**
 I implement **DSPy’s assessment framework** to ensure high classification accuracy:
 
 - **Significance Validation**:  
@@ -59,31 +85,16 @@ conda activate nx1
 
 
 ## ** Setup and Execution**
+Example execution with "guided", an enhanced CoT approach. 
+
 ```sh
 python -m backend.model_runner AAPL 2023-01-01 2023-04-30 --method guided
 ```
 
-
-### **My Intention**
-
-I hoped to allow the user to test out a variety of prompting techniques and clearly understand what
-technique proved to be the most accurate within our LLM observations. I generated a dataset of 66 LLM calls
-as a source of truth to refer to.
-
-Here are other methods you can use within your CLI:
-
-
+Example execution with custom events, 
 ```sh
---method cot            # Chain-of-Thought
---method guided         # Guided Chain-of-Thought
---method zero_shot      # Zero-Shot Classification
---method few_shot       # Few-Shot Classification
---method self_consistency # Self-Consistency Majority Voting
---method tree_of_thought # Tree-of-Thought Classification
---method self_refinement # Iterative Self-Refinement
---method decomposition  # Decomposition-Based Event Analysis
+python -m backend.model_runner AAPL 2023-01-01 2023-04-30 --method cot --categories "Earnings Report" "Regulatory Action"
 ```
 
-Of-course some methods work better than others - LLM observations and evaluations are critical in helping us 
-achieve a better understanding of the prompting techniques we hope to implement. Opik's system allows me 
-a great interface to interpret my results
+
+
