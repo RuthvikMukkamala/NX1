@@ -49,11 +49,41 @@ I implement **DSPy’s assessment framework** to ensure high classification accu
 
 ---
 
-## ** Setup and Execution**
-
 ### **Create a Conda Environment**
 Ensure that you have **Anaconda** or **Miniconda** installed before proceeding.
 
 ```sh
 conda env create -f environment.yml
 conda activate nx1
+```
+
+
+## ** Setup and Execution**
+```sh
+python -m backend.model_runner AAPL 2023-01-01 2023-04-30 --method guided
+```
+
+
+### **My Intention**
+
+I hoped to allow the user to test out a variety of prompting techniques and clearly understand what
+technique proved to be the most accurate within our LLM observations. I generated a dataset of 66 LLM calls
+as a source of truth to refer to.
+
+Here are other methods you can use within your CLI:
+
+
+```sh
+--method cot            # Chain-of-Thought
+--method guided         # Guided Chain-of-Thought
+--method zero_shot      # Zero-Shot Classification
+--method few_shot       # Few-Shot Classification
+--method self_consistency # Self-Consistency Majority Voting
+--method tree_of_thought # Tree-of-Thought Classification
+--method self_refinement # Iterative Self-Refinement
+--method decomposition  # Decomposition-Based Event Analysis
+```
+
+Of-course some methods work better than others - LLM observations and evaluations are critical in helping us 
+achieve a better understanding of the prompting techniques we hope to implement. Opik's system allows me 
+a great interface to interpret my results
