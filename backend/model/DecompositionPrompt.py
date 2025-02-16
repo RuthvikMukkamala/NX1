@@ -80,4 +80,4 @@ class DecompositionModule(dspy.Module):
             )
             self.opik_callback.flush()
             print(f"Error during decomposition: {e}")
-            return None, None  # Return None in case of an error
+            return None, None

@@ -4,12 +4,14 @@ from opik.integrations.dspy.callback import OpikCallback
 
 warnings.filterwarnings("ignore")
 
+
 class SelfRefinementPrompt(dspy.Signature):
     input_text = dspy.InputField()
     initial_category = dspy.OutputField()
     initial_significance = dspy.OutputField()
     refined_category = dspy.OutputField()
     refined_significance = dspy.OutputField()
+
 
 class SelfRefinementModule(dspy.Module):
     def __init__(self, num_iterations=2):
@@ -33,7 +35,8 @@ class SelfRefinementModule(dspy.Module):
             current_category = result.refined_category
             current_significance = result.refined_significance
 
-        self.opik_callback.on_module_end("self_refinement_task", {"category": current_category, "significance": current_significance})
+        self.opik_callback.on_module_end("self_refinement_task",
+                                         {"category": current_category, "significance": current_significance})
         self.opik_callback.flush()
 
         return current_category, current_significance

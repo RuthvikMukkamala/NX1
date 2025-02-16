@@ -4,12 +4,14 @@ from opik.integrations.dspy.callback import OpikCallback
 
 warnings.filterwarnings("ignore")
 
+
 class ToTPrompt(dspy.Signature):
     input_text = dspy.InputField()
     thoughts = dspy.OutputField()
     evaluations = dspy.OutputField()
     category = dspy.OutputField()
     significance = dspy.OutputField()
+
 
 class ToTModule(dspy.Module):
     def __init__(self, beam_width=3, max_depth=3):
